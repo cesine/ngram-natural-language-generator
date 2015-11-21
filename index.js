@@ -9,7 +9,7 @@ var main = function() {
     ngrams({
       filename: process.argv[2]
     }, function(model, finalWord){
-      console.log('finalWord', finalWord);
+      // console.log('finalWord', finalWord);
       if (!model[finalWord]) {
         model[finalWord] = ['.'];
       } else {
