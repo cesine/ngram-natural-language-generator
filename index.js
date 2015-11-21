@@ -8,7 +8,13 @@ var main = function() {
 
     ngrams({
       filename: process.argv[2]
-    }, function(model){
+    }, function(model, finalWord){
+      console.log('finalWord', finalWord);
+      if (!model[finalWord]) {
+        model[finalWord] = ['.'];
+      } else {
+        model[finalWord].push('.');
+      }
       // console.log('Generated model ', model);
 
       var sentence = nlg({
