@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 	<style>
-		.drop_zone {
+		.drop-zone {
 			border: 2px dashed #bbb;
 			-moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
@@ -16,18 +16,30 @@
 			font: 20pt bold 'Vollkorn';
 			color: #bbb;
 		}
+
+		#byte_content {
+			margin: 5px 0;
+			max-height: 100px;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+		#byte_range {
+			margin-top: 5px;
+		}
+
 	</style>
 </head>
 
 <body>
 	<form>
-		<textarea id="drop_zone" class="drop_zone" placeholder="Drop zone"></textarea>
+		<textarea id="text" class="drop-zone" placeholder="Drop zone"></textarea>
 		<input type="file" id="files" name="files[]" multiple class="btn btn-primary"/>
 		<output id="list"></output>
 		<div class="lead" id="result"></div>
 	</form>
 
-
+	<div id="byte_range"></div>
 
 	<script type="text/javascript" src="../lib/drag-and-drop-file-upload.js"></script>
 </body>
