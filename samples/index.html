@@ -71,13 +71,13 @@
 
 			if (!NLG.currentOptions.model && !NLG.currentOptions.text){
 				NLG.currentOptions.text = document.getElementById('ngram-nlg-text').value;
-				NLG.ngrams(NLG.currentOptions, function(err, result){
+				NLG.build(NLG.currentOptions, function(err, result){
 					if (err) return console.warn(err);
 
-					document.getElementById('ngram-nlg-result').value = NLG.nlg(NLG.currentOptions.model);
+					document.getElementById('ngram-nlg-result').value = NLG.generate(NLG.currentOptions.model);
 				});
 			} else {
-				var result = NLG.nlg(NLG.currentOptions.model);
+				var result = NLG.generate(NLG.currentOptions.model);
 				document.getElementById('ngram-nlg-result').value = result;
 			}
 

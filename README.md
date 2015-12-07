@@ -9,10 +9,46 @@ Takes in text/file(s)/stream(s) and generates random sentences that sound like t
 ## Commandline
 
 ```bash
+$ npm install ngram-natural-language-generator --save
 $ ./index.js samples/jaberwocky.txt
 ```
 
-## Javascript
+## Browser
+
+```bash
+$ bower install ngram-natural-language-generator --save
+```
+
+There is an example browser use in [samples/index.html](samples/index.html).
+
+```html
+<textarea id="ngram-nlg-text"></textarea>
+<textarea id="ngram-nlg-result"></textarea>
+
+<script>
+	window.NLG = window.exports = window.exports || {};
+</script>
+
+<script src="bower_components/ngram-natural-language-generator/lib/tokenizer.js"></script>
+<script src="bower_components/ngram-natural-language-generator/lib/nlg.js"></script>
+<script src="bower_components/ngram-natural-language-generator/lib/ngrams.js"></script>
+<script src="bower_components/ngram-natural-language-generator/lib/ngram-nlg.js"></script>
+<script src="bower_components/ngram-natural-language-generator/lib/drag-and-drop-file-upload.js"></script>
+
+<script>
+	NLG.currentOptions  = {
+		text: ''
+	};
+	NLG.currentOptions.text = document.getElementById('ngram-nlg-text').value;
+	NLG.build(NLG.currentOptions, function(err, result){
+		if (err) return console.warn(err);
+		document.getElementById('ngram-nlg-result').value = NLG.generate(NLG.currentOptions.model);
+	});
+</script>
+
+```
+
+## Node
 
 From file:
 
