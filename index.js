@@ -7,10 +7,7 @@ var generator = function(options, callback) {
   ngrams(options, function(err, result) {
     if (err) callback(err);
 
-    // console.log('Generated options.model ', options.model);
-
     var sentence = nlg(options.model);
-    // console.log(sentence);
     if (typeof callback === "function") {
       callback(null, sentence);
     }
