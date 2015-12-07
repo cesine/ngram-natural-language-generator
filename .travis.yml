@@ -8,3 +8,9 @@ node_js:
   - "0.8"
   - "0.6"
   - "iojs"
+
+
+before_install:
+  # Download and configure deps
+  - npm install -g jasmine-node
+  - npm install -g jshint
