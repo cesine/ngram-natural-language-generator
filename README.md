@@ -4,6 +4,9 @@
 
 Takes in text/file(s)/stream(s) and generates random sentences that sound like they could have been in the original text using a bigram generator.
 
+<img width="1145" alt="screen shot 2015-12-07 at 1 28 34 am" src="https://cloud.githubusercontent.com/assets/196199/11620487/74c0a5ca-9c81-11e5-8598-860556569205.png">
+
+
 # Usage
 
 ## Commandline
