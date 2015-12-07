@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 	<style>
-		.drop-zone {
+		.ngram-nlg-drop-zone {
 			border: 2px dashed #bbb;
 			-moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
@@ -19,18 +19,18 @@
 			min-height: 20em;
 		}
 
-		#byte_content {
+		#ngram-nlg-byte_content {
 			margin: 5px 0;
 			max-height: 100px;
 			overflow-y: auto;
 			overflow-x: hidden;
 		}
 
-		#byte_range {
+		#ngram-nlg-byte_range {
 			margin-top: 5px;
 		}
 
-		.full-width {
+		.ngram-nlg-full-width {
 			text-align: center;
 			width: 100%;
 		}
@@ -39,13 +39,13 @@
 
 <body>
 	<form>
-		<textarea id="text" class="drop-zone" placeholder="Drop zone"></textarea>
-		<input type="file" id="files" name="files[]" multiple class="btn btn-primary full-width"/>
-		<output id="list"></output>
-		<div class="lead" id="result"></div>
+		<textarea id="ngram-nlg-text" class="ngram-nlg-drop-zone" placeholder="Drop zone"></textarea>
+		<input type="file" id="ngram-nlg-files" name="files[]" multiple class="btn btn-primary ngram-nlg-full-width"/>
+		<output id="ngram-nlg-list"></output>
+		<div class="lead" id="ngram-nlg-result"></div>
 	</form>
 
-	<div id="byte_range"></div>
+	<div id="ngram-nlg-byte_range"></div>
 
 	<script type="text/javascript" src="../lib/drag-and-drop-file-upload.js"></script>
 	<script>
