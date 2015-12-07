@@ -16,7 +16,7 @@
 			font: 20pt bold 'Vollkorn';
 			color: #bbb;
 			width: 100%;
-			min-height: 20em;
+			min-height: 15em;
 		}
 
 		#ngram-nlg-byte_content {
@@ -39,20 +39,51 @@
 
 <body>
 	<form>
-		<textarea id="ngram-nlg-text" class="ngram-nlg-drop-zone" placeholder="Drop zone"></textarea>
 		<input type="file" id="ngram-nlg-files" name="files[]" multiple class="btn btn-primary ngram-nlg-full-width"/>
+		<textarea id="ngram-nlg-text" class="ngram-nlg-drop-zone" placeholder="Drop files here"></textarea>
+
 		<output id="ngram-nlg-list"></output>
-		<div class="lead" id="ngram-nlg-result"></div>
+		<div id="ngram-nlg-byte_range"></div>
+
+		<button id="ngram-nlg-generate" class="btn btn-primary ngram-nlg-full-width">Generate</button>
+		<textarea id="ngram-nlg-result" class="ngram-nlg-drop-zone ngram-nlg-full-width" placeholder="Generated Text"></textarea>
+
 	</form>
 
-	<div id="ngram-nlg-byte_range"></div>
 
 	<script>
 		window.NLG = window.exports = window.exports || {};
 	</script>
+	<script type="text/javascript" src="../lib/tokenizer.js"></script>
+	<script type="text/javascript" src="../lib/nlg.js"></script>
+	<script type="text/javascript" src="../lib/ngrams.js"></script>
+	<script type="text/javascript" src="../lib/ngram-nlg.js"></script>
 	<script type="text/javascript" src="../lib/drag-and-drop-file-upload.js"></script>
 	<script>
 		NLG.dragAndDropFileUtils.addListeners();
+
+		NLG.currentOptions  = {
+			text: ''
+		};
+
+		document.getElementById('ngram-nlg-generate').onclick = function(evt){
+			if (evt) evt.preventDefault();
+
+			if (!NLG.currentOptions.model && !NLG.currentOptions.text){
+				NLG.currentOptions.text = document.getElementById('ngram-nlg-text').value;
+				NLG.ngrams(NLG.currentOptions, function(err, result){
+					if (err) return console.warn(err);
+
+					document.getElementById('ngram-nlg-result').value = NLG.nlg(NLG.currentOptions.model);
+				});
+			} else {
+				var result = NLG.nlg(NLG.currentOptions.model);
+				document.getElementById('ngram-nlg-result').value = result;
+			}
+
+			return false;
+		};
+
 	</script>
 </body>
 </html>
