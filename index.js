@@ -1,7 +1,7 @@
 #!/usr/local/bin/node
 
-var ngrams = require('./lib/ngrams').add;
-var nlg = require('./lib/nlg').generateText;
+var ngrams = require('./lib/ngrams').ngrams;
+var nlg = require('./lib/nlg').nlg;
 
 var generator = function(options, callback) {
   ngrams(options, function(err, result) {

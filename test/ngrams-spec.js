@@ -4,7 +4,7 @@ var fs = require('fs');
 var readline = require('readline');
 var http = require('http');
 
-var ngrams = require('../lib/ngrams');
+var ngrams = require('../lib/ngrams').ngrams;
 
 var TINY_MODEL = {
 	'.': ['Colorless'],
@@ -31,7 +31,7 @@ describe('ngrams', function() {
 				tokens: ['how', 'i\'s', 'want', 's', 'is', 'how', '.']
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 				expect(result).toEqual(options);
 				expect(options.tokens).toBeUndefined();
@@ -60,7 +60,7 @@ describe('ngrams', function() {
 				text: 'Colorless green ideas sleep furiously.'
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 				expect(result).toEqual(options);
 				expect(options.tokens).toBeUndefined();
@@ -82,7 +82,7 @@ describe('ngrams', function() {
 				filename: 'samples/jabberwocky.txt'
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 				expect(result).toEqual(options);
 				expect(options.tokens).toBeUndefined();
@@ -107,7 +107,7 @@ describe('ngrams', function() {
 			expect(options.stream).toBeDefined();
 			expect(options.stream.on).toBeDefined();
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 				expect(result).toEqual(options);
 				expect(options.tokens).toBeUndefined();
@@ -130,7 +130,7 @@ describe('ngrams', function() {
 				expect(options.stream).toBeDefined();
 				expect(options.stream.on).toBeDefined();
 
-				ngrams.add(options, function(err, result) {
+				ngrams(options, function(err, result) {
 					expect(err).toBeNull();
 					expect(result).toEqual(options);
 					expect(options.tokens).toBeUndefined();
@@ -158,7 +158,7 @@ describe('ngrams', function() {
 			expect(options.stream).toBeDefined();
 			expect(options.stream.on).toBeDefined();
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 				expect(result).toEqual(options);
 				expect(options.tokens).toBeUndefined();
@@ -183,7 +183,7 @@ describe('ngrams', function() {
 				filename: 'samples/jabberwocky.txt'
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 				expect(result).toEqual(options);
 				expect(options.tokens).toBeUndefined();
@@ -209,11 +209,11 @@ describe('ngrams', function() {
 				text: 'Colorless green ideas'
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 
 				options.text = "sleep furiously.";
-				ngrams.add(options, function() {
+				ngrams(options, function() {
 
 					expect(result).toEqual(options);
 					expect(options.tokens).toBeUndefined();
@@ -241,7 +241,7 @@ describe('ngrams', function() {
 				stream: fs.createReadStream('temp.txt')
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 
 				expect(result).toEqual(options);
@@ -270,7 +270,7 @@ describe('ngrams', function() {
 				stream: fs.createReadStream('temp.txt')
 			};
 
-			ngrams.add(options, function(err, result) {
+			ngrams(options, function(err, result) {
 				expect(err).toBeNull();
 
 				expect(result).toEqual(options);

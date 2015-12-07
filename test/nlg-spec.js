@@ -1,6 +1,6 @@
 'use strict';
 
-var nlg = require('../lib/nlg').generateText;
+var nlg = require('../lib/nlg').nlg;
 
 var TINY_MODEL = {
 	'.': ['Colorless'],
