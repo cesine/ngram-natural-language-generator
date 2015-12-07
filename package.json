@@ -4,7 +4,7 @@
   "description": "Takes in a text file and generates random sentences that sound like they could have been in the file",
   "main": "index.js",
   "scripts": {
-    "test": "jshint lib && jshint test && jasmine-node test"
+    "test": "jshint lib && jshint test && jasmine-node --captureExceptions test || exit 2"
   },
   "author": "cesine <cesine@yahoo.com",
   "license": "MIT"
