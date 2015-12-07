@@ -3,10 +3,9 @@
   "version": "0.3.0",
   "description": "Takes in a text/file/stream and generates random sentences that sound like they could have been in the text",
   "main": "index.js",
-  "scripts": {
-    "test": "jshint lib && jshint test && jasmine-node --captureExceptions test || exit 2"
-  },
-  "author": "cesine <cesine@yahoo.com",
+  "authors": [
+    "cesine <cesine@yahoo.com"
+  ],
   "license": "MIT",
   "keywords": [
     "nlg",
@@ -15,5 +14,18 @@
     "generation",
     "ngram",
     "tokenizer"
+  ],
+  "homepage": "https://github.com/cesine/ngram-natural-language-generator",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
   ]
 }
