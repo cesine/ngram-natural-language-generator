@@ -1,8 +1,8 @@
 {
   "name": "ngram-natural-language-generator",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Takes in a text/file/stream and generates random sentences that sound like they could have been in the text",
-  "main": "index.js",
+  "main": "lib/tokenizer.js, lib/ngrams.js, lib/nlg.js",
   "authors": [
     "cesine <cesine@yahoo.com"
   ],
