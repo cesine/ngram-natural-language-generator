@@ -1,32 +1,35 @@
 #!/usr/local/bin/node
 
-var ngrams = require('./lib/ngrams').buildNgrams;
+var ngrams = require('./lib/ngrams').add;
 var nlg = require('./lib/nlg').generateText;
 
-var main = function() {
-  if (process.argv.length > 2) {
+var generator = function(options, callback) {
+  ngrams(options, function(err, result) {
+    if (err) callback(err);
 
-    ngrams({
-      filename: process.argv[2]
-    }, function(model, finalWord){
-      // console.log('finalWord', finalWord);
-      if (!model[finalWord]) {
-        model[finalWord] = ['.'];
-      } else {
-        model[finalWord].push('.');
-      }
-      // console.log('Generated model ', model);
+    // console.log('Generated options.model ', options.model);
 
-      var sentence = nlg({
-        model: model
-      });
-      console.log(sentence);
-    });
-  }
+    var sentence = nlg(options.model);
+    // console.log(sentence);
+    if (typeof callback === "function") {
+      callback(null, sentence);
+    }
+  });
+
 };
 
-try {
-  main();
-} catch (e) {
-  console.log(e.stack);
+if (require.main === module) {
+  if (process.argv && process.argv.length > 2) {
+    generator({
+      filename: process.argv[2]
+    }, function(err, sentence) {
+      if (err) {
+        console.log(err.stack);
+        return process.exit(1);
+      }
+      console.log('\n\n' + sentence + '\n\n');
+    });
+  }
+} else {
+  exports.generator = generator;
 }

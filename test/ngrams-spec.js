@@ -1,7 +1,8 @@
+'use strict';
+
 var fs = require('fs');
 var readline = require('readline');
 var http = require('http');
-var stream = require('stream');
 
 var ngrams = require('../lib/ngrams');
 
@@ -211,7 +212,7 @@ describe('ngrams', function() {
 			ngrams.add(options, function(err, result) {
 				expect(err).toBeNull();
 
-				options.text = "sleep furiously."
+				options.text = "sleep furiously.";
 				ngrams.add(options, function() {
 
 					expect(result).toEqual(options);
