@@ -11,10 +11,12 @@
 			-moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
 			border-radius: 5px;
-			padding: 25px;
+			padding: 1em;
 			text-align: center;
 			font: 20pt bold 'Vollkorn';
 			color: #bbb;
+			width: 100%;
+			min-height: 20em;
 		}
 
 		#byte_content {
@@ -28,13 +30,17 @@
 			margin-top: 5px;
 		}
 
+		.full-width {
+			text-align: center;
+			width: 100%;
+		}
 	</style>
 </head>
 
 <body>
 	<form>
 		<textarea id="text" class="drop-zone" placeholder="Drop zone"></textarea>
-		<input type="file" id="files" name="files[]" multiple class="btn btn-primary"/>
+		<input type="file" id="files" name="files[]" multiple class="btn btn-primary full-width"/>
 		<output id="list"></output>
 		<div class="lead" id="result"></div>
 	</form>
