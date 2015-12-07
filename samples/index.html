@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ngram Natural Language Generator</title>
+  <title>Ngram Natural Language Generator</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-	<style>
-		.ngram-nlg-drop-zone {
-			border: 2px dashed #bbb;
-			-moz-border-radius: 5px;
-			-webkit-border-radius: 5px;
-			border-radius: 5px;
-			padding: 1em;
-			text-align: center;
-			font: 20pt bold 'Vollkorn';
-			color: #bbb;
-			width: 100%;
-			min-height: 15em;
-		}
+  <style>
+    .ngram-nlg-drop-zone {
+      border: 2px dashed #bbb;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      padding: 1em;
+      text-align: center;
+      font: 20pt bold 'Vollkorn';
+      color: #bbb;
+      width: 100%;
+      min-height: 15em;
+    }
 
-		#ngram-nlg-byte_content {
-			margin: 5px 0;
-			max-height: 100px;
-			overflow-y: auto;
-			overflow-x: hidden;
-		}
+    #ngram-nlg-byte_content {
+      margin: 5px 0;
+      max-height: 100px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
 
-		#ngram-nlg-byte_range {
-			margin-top: 5px;
-		}
+    #ngram-nlg-byte_range {
+      margin-top: 5px;
+    }
 
-		.ngram-nlg-full-width {
-			text-align: center;
-			width: 100%;
-		}
-	</style>
+    .ngram-nlg-full-width {
+      text-align: center;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
-	<form>
-		<input type="file" id="ngram-nlg-files" name="files[]" multiple class="btn btn-primary ngram-nlg-full-width"/>
-		<textarea id="ngram-nlg-text" class="ngram-nlg-drop-zone" placeholder="Drop files here"></textarea>
+  <form>
+    <input type="file" id="ngram-nlg-files" name="files[]" multiple class="btn btn-primary ngram-nlg-full-width"/>
+    <textarea id="ngram-nlg-text" class="ngram-nlg-drop-zone" placeholder="Drop files here"></textarea>
 
-		<output id="ngram-nlg-list"></output>
-		<div id="ngram-nlg-byte_range"></div>
+    <output id="ngram-nlg-list"></output>
+    <div id="ngram-nlg-byte_range"></div>
 
-		<button id="ngram-nlg-generate" class="btn btn-primary ngram-nlg-full-width">Generate</button>
-		<textarea id="ngram-nlg-result" class="ngram-nlg-drop-zone ngram-nlg-full-width" placeholder="Generated Text"></textarea>
+    <button id="ngram-nlg-generate" class="btn btn-primary ngram-nlg-full-width">Generate</button>
+    <textarea id="ngram-nlg-result" class="ngram-nlg-drop-zone ngram-nlg-full-width" placeholder="Generated Text"></textarea>
 
-	</form>
+  </form>
 
 
-	<script>
-		window.NLG = window.exports = window.exports || {};
-	</script>
-	<script type="text/javascript" src="../lib/tokenizer.js"></script>
-	<script type="text/javascript" src="../lib/nlg.js"></script>
-	<script type="text/javascript" src="../lib/ngrams.js"></script>
-	<script type="text/javascript" src="../lib/ngram-nlg.js"></script>
-	<script type="text/javascript" src="../lib/drag-and-drop-file-upload.js"></script>
-	<script>
-		NLG.dragAndDropFileUtils.addListeners();
+  <script>
+    window.NLG = window.exports = window.exports || {};
+  </script>
+  <script type="text/javascript" src="../lib/tokenizer.js"></script>
+  <script type="text/javascript" src="../lib/nlg.js"></script>
+  <script type="text/javascript" src="../lib/ngrams.js"></script>
+  <script type="text/javascript" src="../lib/ngram-nlg.js"></script>
+  <script type="text/javascript" src="../lib/drag-and-drop-file-upload.js"></script>
+  <script>
+    NLG.dragAndDropFileUtils.addListeners();
 
-		NLG.currentOptions  = {
-			text: ''
-		};
+    NLG.currentOptions  = {
+      text: ''
+    };
 
-		document.getElementById('ngram-nlg-generate').onclick = function(evt){
-			if (evt) evt.preventDefault();
+    document.getElementById('ngram-nlg-generate').onclick = function(evt){
+      if (evt) evt.preventDefault();
 
-			if (!NLG.currentOptions.model && !NLG.currentOptions.text){
-				NLG.currentOptions.text = document.getElementById('ngram-nlg-text').value;
-				NLG.build(NLG.currentOptions, function(err, result){
-					if (err) return console.warn(err);
+      if (!NLG.currentOptions.model && !NLG.currentOptions.text){
+        NLG.currentOptions.text = document.getElementById('ngram-nlg-text').value;
+        NLG.build(NLG.currentOptions, function(err, result){
+          if (err) return console.warn(err);
 
-					document.getElementById('ngram-nlg-result').value = NLG.generate(NLG.currentOptions.model);
-				});
-			} else {
-				var result = NLG.generate(NLG.currentOptions.model);
-				document.getElementById('ngram-nlg-result').value = result;
-			}
+          document.getElementById('ngram-nlg-result').value = NLG.generate(NLG.currentOptions.model);
+        });
+      } else {
+        var result = NLG.generate(NLG.currentOptions.model);
+        document.getElementById('ngram-nlg-result').value = result;
+      }
 
-			return false;
-		};
+      return false;
+    };
 
-	</script>
+  </script>
 </body>
 </html>
