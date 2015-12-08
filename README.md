@@ -2,9 +2,12 @@
 
 # ngram-natural-language-generator
 
-Takes in text/file(s)/stream(s) and generates random sentences that sound like they could have been in the original text using a bigram generator.
+Takes in text/file(s)/stream(s) and generates random sentences that sound like they could have been in the original text using a bigram generator. Surprisingly works on most languages and writing styles.
 
-<img width="1145" alt="screen shot 2015-12-07 at 1 28 34 am" src="https://cloud.githubusercontent.com/assets/196199/11620487/74c0a5ca-9c81-11e5-8598-860556569205.png">
+You can experiment with your own texts here http://cesine.github.io/ngram-natural-language-generator/samples
+
+<img width="400" alt="screen shot 2015-12-07 at 1 28 34 am" src="https://cloud.githubusercontent.com/assets/196199/11620487/74c0a5ca-9c81-11e5-8598-860556569205.png">
+<img width="400" alt="screen shot 2015-12-07 at 9 09 01 pm" src="https://cloud.githubusercontent.com/assets/196199/11645948/9fbc08c8-9d26-11e5-81af-07591e4e2501.png">
 
 
 # Usage
@@ -106,6 +109,25 @@ http.get('http://www.jabberwocky.com/carroll/jabber/jabberwocky.html', function(
 	});
 });
 
+```
+
+From tokens:
+
+If you're working with a language which doesn't tokenize on whitespace or unicode punctionation you can supply the tokens.
+
+
+```javascript
+var generator = require('ngram-natural-language-generator');
+
+generator({
+	tokens: ['その', '酩酊', '状態を', '愛する', 'ことに', 'よって'],
+	model: {
+		maxLength: 100,
+		minLength: 50
+	}
+}, function(err, sentence){
+	console.log(sentence);
+});
 ```
 
 [npm-url]: https://npmjs.org/package/ngram-natural-language-generator

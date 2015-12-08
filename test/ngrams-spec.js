@@ -3,6 +3,7 @@
 var fs = require('fs');
 var readline = require('readline');
 var http = require('http');
+var https = require('https');
 
 var ngrams = require('../lib/ngrams').ngrams;
 
@@ -288,6 +289,208 @@ describe('ngrams', function() {
         expect(options.model.tokenCount).toEqual(6);
         expect(options.model.maxSize).toEqual(100);
         done();
+      });
+    });
+  });
+
+  describe('language independant', function() {
+    it('should support Inuktitut', function(done) {
+      http.get('http://www.sante-services-sociaux.ca/iu/offres-d-emploi/agent-e-planification-programmation-enfance-jeunesse-famille_1028245518', function(res) {
+        // http.get('http://bibles.org/ike-EAIB/Num/26', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['ᓄᓇᕕᒻᒥ']).toEqual(['ᓄᓇᓕᓕᒫᓂ', 'ᐊᒻᒪᓗ', 'ᐃᓗᓯᓕᕆᔨᒃᑯᑦ', 'ᓄᓇᓕᓕᒫᓂ', 'ᓄᓇᓕᓕᒫᓂ']);
+          expect(options.model.tokenCount).toBeGreaterThan(1000);
+          expect(options.model.typeCount).toBeGreaterThan(600);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(3);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support Greek', function(done) {
+      http.get('http://www.tilestwra.com/se-afto-to-spiti-iparchi-ena-parathiro-sto-patoma-dite-giati/', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['της']).toEqual(['Συρίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'TILESTWRA', 'κόρης', 'κόρης', 'κόρης', 'Ρωσίας', 'Ρωσίας']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(8000);
+          expect(options.model.typeCount).toBeGreaterThan(1000);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(6);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support Cyrilic', function(done) {
+      http.get('http://www.ewnc.org/node/20214', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['Вырубки']).toEqual(['в', 'во', 'в', 'леса', 'леса']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(9000);
+          expect(options.model.typeCount).toBeGreaterThan(1000);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(6);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support Thai', function(done) {
+      http.get('http://thai.tourismthailand.org/เกี่ยวกับประเทศไทย/เกี่ยวกับ-ททท', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['ที่พัก']).toEqual(['สถานที่ท่องเที่ยว', 'โรงแรม', 'ที่พัก', 'a']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(800);
+          expect(options.model.typeCount).toBeGreaterThan(200);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(3);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support Korean', function(done) {
+      http.get('http://www.pro-face.com/otasuke_ko/qa/gp3000/prtl/error_e.htm', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['포트']).toEqual(['번호', '번호가']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(2000);
+          expect(options.model.typeCount).toBeGreaterThan(400);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(6);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support Georgian', function(done) {
+      https.get('https://raw.githubusercontent.com/batumi/SamartlosSakonstitutsioSasamartdoSarke/master/files/sarchelebi/558_24_06_2013.txt', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['ადასტურებენ']).toEqual(['სადავო', 'შუამდგომლობის']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(3000);
+          expect(options.model.typeCount).toBeGreaterThan(1000);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(2);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support urdu', function(done) {
+      https.get('https://raw.githubusercontent.com/cesine/CorporaForFieldLinguistics/master/Urdu/urdublogging.html', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['لینکس']).toEqual(['انسٹال', 'کا', 'انسٹال', 'کا']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(4000);
+          expect(options.model.typeCount).toBeGreaterThan(800);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(5);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
+      });
+    });
+
+    it('should support Japanese', function(done) {
+      https.get('https://raw.githubusercontent.com/iLanguage/JapaneseCorpusAngoSakaguchi/master/corpus/ango1.txt', function(res) {
+        var options = {
+          stream: res
+        };
+
+        ngrams(options, function(err) {
+          expect(err).toBeNull();
+
+          // console.log(options.model);
+          expect(options.model).toBeDefined();
+
+          expect(options.model.data['が']).toEqual(['その酩酊状態を愛することによって']);
+
+          expect(options.model.tokenCount).toBeGreaterThan(900);
+          expect(options.model.typeCount).toBeGreaterThan(900);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(1);
+          done();
+        });
+      }).on('error', function(err) {
+        console.error(err);
+        done(err);
       });
     });
   });
