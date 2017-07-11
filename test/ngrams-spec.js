@@ -320,6 +320,7 @@ describe('ngrams', function() {
   });
 
   describe('language independant', function() {
+    this.timeout(10 * 1000);
     it('should support Inuktitut', function(done) {
       https.get('https://www.sante-services-sociaux.ca/iu/offres-d-emploi', function(res) {
         // http.get('http://bibles.org/ike-EAIB/Num/26', function(res) {
@@ -371,7 +372,6 @@ describe('ngrams', function() {
     });
 
     it('should support Cyrilic', function(done) {
-      this.timeout(10 * 1000);
       http.get('http://www.ewnc.org/node/20214', function(res) {
         var options = {
           stream: res
