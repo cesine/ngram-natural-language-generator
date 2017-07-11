@@ -4,6 +4,7 @@ var fs = require('fs');
 var readline = require('readline');
 var http = require('http');
 var https = require('https');
+var expect = require('chai').expect;
 
 var ngrams = require('../lib/ngrams').ngrams;
 
@@ -19,7 +20,7 @@ var TINY_MODEL = {
 describe('ngrams', function() {
 
   it('should load', function() {
-    expect(ngrams).toBeDefined();
+    expect(ngrams).to.be.an('function');
   });
 
   describe('options', function() {
@@ -33,12 +34,12 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data).toEqual({
+        expect(options.model).to.be.an('object');
+        expect(options.model.data).to.deep.equal({
           '.': ['how'],
           'how': ['i\'s', '.'],
           'i\'s': ['want'],
@@ -46,9 +47,9 @@ describe('ngrams', function() {
           's': ['is'],
           'is': ['how']
         });
-        expect(options.model.typeCount).toEqual(6);
-        expect(options.model.tokenCount).toEqual(7);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model.typeCount).to.equal(6);
+        expect(options.model.tokenCount).to.equal(7);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -62,15 +63,15 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data).toEqual(TINY_MODEL);
-        expect(options.model.typeCount).toEqual(6);
-        expect(options.model.tokenCount).toEqual(6);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model).to.be.an('object');
+        expect(options.model.data).to.deep.equal(TINY_MODEL);
+        expect(options.model.typeCount).to.equal(6);
+        expect(options.model.tokenCount).to.equal(6);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -84,16 +85,16 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data.thought).toEqual(['.', 'he']);
-        expect(options.model.data.the).toEqual(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey']);
-        expect(options.model.typeCount).toEqual(69);
-        expect(options.model.tokenCount).toEqual(101);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model).to.be.an('object');
+        expect(options.model.data.thought).to.deep.equal(['.', 'he']);
+        expect(options.model.data.the).to.deep.equal(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey']);
+        expect(options.model.typeCount).to.equal(69);
+        expect(options.model.tokenCount).to.equal(101);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -105,20 +106,20 @@ describe('ngrams', function() {
         },
         stream: fs.createReadStream('samples/jabberwocky.txt')
       };
-      expect(options.stream).toBeDefined();
-      expect(options.stream.on).toBeDefined();
+      expect(options.stream).to.be.an('object');
+      expect(options.stream.on).to.be.an('function');
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data.thought).toEqual(['.', 'he']);
-        expect(options.model.data.the).toEqual(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey']);
-        expect(options.model.typeCount).toEqual(69);
-        expect(options.model.tokenCount).toEqual(101);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model).to.be.an('object');
+        expect(options.model.data.thought).to.deep.equal(['.', 'he']);
+        expect(options.model.data.the).to.deep.equal(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey']);
+        expect(options.model.typeCount).to.equal(69);
+        expect(options.model.tokenCount).to.equal(101);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -128,20 +129,20 @@ describe('ngrams', function() {
         var options = {
           stream: res
         };
-        expect(options.stream).toBeDefined();
-        expect(options.stream.on).toBeDefined();
+        expect(options.stream).to.be.an('object');
+        expect(options.stream.on).to.be.an('function');
 
         ngrams(options, function(err, result) {
-          expect(err).toBeNull();
-          expect(result).toEqual(options);
-          expect(options.tokens).toBeUndefined();
+          expect(err).to.equal(null);
+          expect(result).to.equal(options);
+          expect(options.tokens).to.be.an('undefined');
 
-          expect(options.model).toBeDefined();
-          expect(options.model.data.thought).toEqual(['.', 'he']);
-          expect(options.model.data.the).toEqual(['Looking', 'slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey', 'Jabberwock', 'slithy', 'wabe', 'borogoves', 'mome']);
-          expect(options.model.typeCount).toEqual(149);
-          expect(options.model.tokenCount).toEqual(348);
-          expect(options.model.maxSize).toEqual(10000);
+          expect(options.model).to.be.an('object');
+          expect(options.model.data.thought).to.deep.equal(['.', 'he']);
+          expect(options.model.data.the).to.deep.equal(['Looking', 'slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey', 'Jabberwock', 'slithy', 'wabe', 'borogoves', 'mome']);
+          expect(options.model.typeCount).to.equal(149);
+          expect(options.model.tokenCount).to.equal(348);
+          expect(options.model.maxSize).to.equal(10000);
           done();
         });
       });
@@ -156,20 +157,20 @@ describe('ngrams', function() {
           input: fs.createReadStream('samples/jabberwocky.txt')
         })
       };
-      expect(options.stream).toBeDefined();
-      expect(options.stream.on).toBeDefined();
+      expect(options.stream).to.be.an('object');
+      expect(options.stream.on).to.be.an('function');
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data.thought).toEqual(['.', 'he']);
-        expect(options.model.data.the).toEqual(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey']);
-        expect(options.model.typeCount).toEqual(69);
-        expect(options.model.tokenCount).toEqual(101);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model).to.be.an('object');
+        expect(options.model.data.thought).to.deep.equal(['.', 'he']);
+        expect(options.model.data.the).to.deep.equal(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey']);
+        expect(options.model.typeCount).to.equal(69);
+        expect(options.model.tokenCount).to.equal(101);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -185,16 +186,16 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data.thought).toEqual(['.', 'he']);
-        expect(options.model.data.the).toEqual(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey', 'Jabberwock', 'slithy']);
-        expect(options.model.typeCount).toEqual(96);
-        expect(options.model.tokenCount).toEqual(166);
-        expect(options.model.maxSize).toEqual(162);
+        expect(options.model).to.be.an('object');
+        expect(options.model.data.thought).to.deep.equal(['.', 'he']);
+        expect(options.model.data.the).to.deep.equal(['slithy', 'wabe', 'borogoves', 'mome', 'Jabberwock', 'claws', 'Jubjub', 'manxome', 'Tumtum', 'tulgey', 'Jabberwock', 'slithy']);
+        expect(options.model.typeCount).to.equal(96);
+        expect(options.model.tokenCount).to.equal(166);
+        expect(options.model.maxSize).to.equal(162);
         done();
       });
     });
@@ -211,25 +212,25 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
+        expect(err).to.equal(null);
 
         options.text = "sleep furiously.";
         ngrams(options, function() {
 
-          expect(result).toEqual(options);
-          expect(options.tokens).toBeUndefined();
+          expect(result).to.equal(options);
+          expect(options.tokens).to.be.an('undefined');
 
-          expect(options.model).toBeDefined();
-          expect(options.model.data).toEqual(TINY_MODEL);
-          expect(options.model.typeCount).toEqual(6);
-          expect(options.model.tokenCount).toEqual(6);
-          expect(options.model.maxSize).toEqual(100);
+          expect(options.model).to.be.an('object');
+          expect(options.model.data).to.deep.equal(TINY_MODEL);
+          expect(options.model.typeCount).to.equal(6);
+          expect(options.model.tokenCount).to.equal(6);
+          expect(options.model.maxSize).to.equal(100);
           done();
         });
       });
     });
 
-    it('should handle multiline sentences', function(done) {
+    it('should handle multiline sentences from stream', function(done) {
       var out = fs.createWriteStream('temp.txt');
       out.write('Colorless green ideas\n');
       out.write('sleep furiously.\n');
@@ -243,16 +244,16 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
+        expect(err).to.equal(null);
 
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data).toEqual(TINY_MODEL);
-        expect(options.model.typeCount).toEqual(6);
-        expect(options.model.tokenCount).toEqual(6);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model).to.be.an('object');
+        expect(options.model.data).to.deep.equal(TINY_MODEL);
+        expect(options.model.typeCount).to.equal(6);
+        expect(options.model.tokenCount).to.equal(6);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -272,22 +273,22 @@ describe('ngrams', function() {
       };
 
       ngrams(options, function(err, result) {
-        expect(err).toBeNull();
+        expect(err).to.equal(null);
 
-        expect(result).toEqual(options);
-        expect(options.tokens).toBeUndefined();
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
 
-        expect(options.model).toBeDefined();
-        expect(options.model.data).toEqual({
+        expect(options.model).to.be.an('object');
+        expect(options.model.data).to.deep.equal({
           '.': ['Colorless', 'sleep'],
           'Colorless': ['green'],
           'green': ['ideas'],
           'sleep': ['furiously'],
           'furiously': ['.']
         });
-        expect(options.model.typeCount).toEqual(5);
-        expect(options.model.tokenCount).toEqual(6);
-        expect(options.model.maxSize).toEqual(100);
+        expect(options.model.typeCount).to.equal(5);
+        expect(options.model.tokenCount).to.equal(6);
+        expect(options.model.maxSize).to.equal(100);
         done();
       });
     });
@@ -295,22 +296,22 @@ describe('ngrams', function() {
 
   describe('language independant', function() {
     it('should support Inuktitut', function(done) {
-      http.get('http://www.sante-services-sociaux.ca/iu/offres-d-emploi/agent-e-planification-programmation-enfance-jeunesse-famille_1028245518', function(res) {
+      https.get('https://www.sante-services-sociaux.ca/iu/offres-d-emploi', function(res) {
         // http.get('http://bibles.org/ike-EAIB/Num/26', function(res) {
         var options = {
           stream: res
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['ᓄᓇᕕᒻᒥ']).toEqual(['ᓄᓇᓕᓕᒫᓂ', 'ᐊᒻᒪᓗ', 'ᐃᓗᓯᓕᕆᔨᒃᑯᑦ', 'ᓄᓇᓕᓕᒫᓂ', 'ᓄᓇᓕᓕᒫᓂ']);
-          expect(options.model.tokenCount).toBeGreaterThan(1000);
-          expect(options.model.typeCount).toBeGreaterThan(600);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(3);
+          expect(options.model.data['ᖃᕆᑕᐅᔭᑎᒍᑦ']).to.deep.equal(['ᓯᓚᑎᑦᓴᔦᑦ', 'ᓯᓚᑎᑦᓴᔦᑦ', 'ᓯᓚᑎᑦᓴᔦᑦ', 'ᓯᓚᑎᑦᓴᔦᑦ', 'ᓯᓚᑎᑦᓴᔦᑦ', 'ᓯᓚᑎᑦᓴᔦᑦ']);
+          expect(options.model.tokenCount).to.be.above(490);
+          expect(options.model.typeCount).to.be.above(490);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(6);
           done();
         });
       }).on('error', function(err) {
@@ -320,22 +321,22 @@ describe('ngrams', function() {
     });
 
     it('should support Greek', function(done) {
-      http.get('http://www.tilestwra.com/se-afto-to-spiti-iparchi-ena-parathiro-sto-patoma-dite-giati/', function(res) {
+      https.get('https://raw.githubusercontent.com/cesine/CorporaForFieldLinguistics/master/Greek/window.txt', function(res) {
         var options = {
           stream: res
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['της']).toEqual(['Συρίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'Ρωσίας', 'TILESTWRA', 'κόρης', 'κόρης', 'κόρης', 'Ρωσίας', 'Ρωσίας']);
+          expect(options.model.data['δωμάτιο']).to.deep.equal(['.', 'το', 'είναι', 'κάβα', 'κάβα', 'κάβα', 'κάβα', 'κάβα', 'κάβα']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(8000);
-          expect(options.model.typeCount).toBeGreaterThan(1000);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(6);
+          expect(options.model.tokenCount).to.be.equal(259);
+          expect(options.model.typeCount).to.be.equal(150);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(1);
           done();
         });
       }).on('error', function(err) {
@@ -345,22 +346,23 @@ describe('ngrams', function() {
     });
 
     it('should support Cyrilic', function(done) {
+      this.timeout(10 * 1000);
       http.get('http://www.ewnc.org/node/20214', function(res) {
         var options = {
           stream: res
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['Вырубки']).toEqual(['в', 'во', 'в', 'леса', 'леса']);
+          expect(options.model.data['Вырубки']).to.deep.equal(['в', 'во', 'в', 'леса', 'леса']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(9000);
-          expect(options.model.typeCount).toBeGreaterThan(1000);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(6);
+          expect(options.model.tokenCount).to.be.above(9000);
+          expect(options.model.typeCount).to.be.above(1000);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(6);
           done();
         });
       }).on('error', function(err) {
@@ -370,22 +372,22 @@ describe('ngrams', function() {
     });
 
     it('should support Thai', function(done) {
-      http.get('http://thai.tourismthailand.org/เกี่ยวกับประเทศไทย/เกี่ยวกับ-ททท', function(res) {
+      https.get('https://thai.tourismthailand.org/เกี่ยวกับประเทศไทย/เกี่ยวกับ-ททท', function(res) {
         var options = {
           stream: res
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['ที่พัก']).toEqual(['สถานที่ท่องเที่ยว', 'โรงแรม', 'ที่พัก', 'a']);
+          expect(options.model.data['ที่พัก']).to.deep.equal(['สถานที่ท่องเที่ยว', 'โรงแรม', 'ที่พัก', 'a']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(800);
-          expect(options.model.typeCount).toBeGreaterThan(200);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(3);
+          expect(options.model.tokenCount).to.be.above(800);
+          expect(options.model.typeCount).to.be.above(200);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(3);
           done();
         });
       }).on('error', function(err) {
@@ -401,16 +403,16 @@ describe('ngrams', function() {
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['포트']).toEqual(['번호', '번호가']);
+          expect(options.model.data['포트']).to.deep.equal(['번호', '번호가']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(2000);
-          expect(options.model.typeCount).toBeGreaterThan(400);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(6);
+          expect(options.model.tokenCount).to.be.above(2000);
+          expect(options.model.typeCount).to.be.above(400);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(6);
           done();
         });
       }).on('error', function(err) {
@@ -426,16 +428,16 @@ describe('ngrams', function() {
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['ადასტურებენ']).toEqual(['სადავო', 'შუამდგომლობის']);
+          expect(options.model.data['ადასტურებენ']).to.deep.equal(['სადავო', 'შუამდგომლობის']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(3000);
-          expect(options.model.typeCount).toBeGreaterThan(1000);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(2);
+          expect(options.model.tokenCount).to.be.above(3000);
+          expect(options.model.typeCount).to.be.above(1000);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(2);
           done();
         });
       }).on('error', function(err) {
@@ -451,16 +453,16 @@ describe('ngrams', function() {
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['لینکس']).toEqual(['انسٹال', 'کا', 'انسٹال', 'کا']);
+          expect(options.model.data['لینکس']).to.deep.equal(['انسٹال', 'کا', 'انسٹال', 'کا']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(4000);
-          expect(options.model.typeCount).toBeGreaterThan(800);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(5);
+          expect(options.model.tokenCount).to.be.above(4000);
+          expect(options.model.typeCount).to.be.above(800);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(5);
           done();
         });
       }).on('error', function(err) {
@@ -476,16 +478,16 @@ describe('ngrams', function() {
         };
 
         ngrams(options, function(err) {
-          expect(err).toBeNull();
+          expect(err).to.equal(null);
 
           // console.log(options.model);
-          expect(options.model).toBeDefined();
+          expect(options.model).to.be.an('object');
 
-          expect(options.model.data['が']).toEqual(['その酩酊状態を愛することによって']);
+          expect(options.model.data['が']).to.deep.equal(['その酩酊状態を愛することによって']);
 
-          expect(options.model.tokenCount).toBeGreaterThan(900);
-          expect(options.model.typeCount).toBeGreaterThan(900);
-          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).toEqual(1);
+          expect(options.model.tokenCount).to.be.above(900);
+          expect(options.model.typeCount).to.be.above(900);
+          expect(Math.floor(options.model.tokenCount / options.model.typeCount)).to.equal(1);
           done();
         });
       }).on('error', function(err) {

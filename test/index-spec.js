@@ -1,11 +1,12 @@
 'use strict';
 
 var ngramNaturalLanguageGenerator = require('../').generator;
+var expect = require('chai').expect;
 
 describe('ngram natural language generator', function() {
 
   it('should load', function() {
-    expect(ngramNaturalLanguageGenerator).toBeDefined();
+    expect(ngramNaturalLanguageGenerator).to.be.an('function');
   });
 
   describe('options', function() {
@@ -20,11 +21,11 @@ describe('ngram natural language generator', function() {
       };
       ngramNaturalLanguageGenerator(options, function(err, sentence) {
 
-        expect(err).toBeNull();
-        expect(sentence).toBeDefined();
+        expect(err).to.equal(null);
+        expect(sentence).to.be.an('string');
         console.log('result ', sentence);
-        expect(sentence).toContain(' ');
-        expect(sentence.split(' ').length >= 1).toBeTruthy();
+        expect(sentence).to.contain(' ');
+        expect(sentence.split(' ').length >= 1).to.equal(true);
 
         done();
       });

@@ -4,7 +4,7 @@
   "description": "Takes in a text/file/stream and generates random sentences that sound like they could have been in the text",
   "main": "index.js",
   "scripts": {
-    "test": "jshint lib && jshint test && jasmine-node --captureExceptions test || exit 2"
+    "test": "jshint lib && jshint test && mocha test || exit 2"
   },
   "author": "cesine <cesine@yahoo.com",
   "license": "MIT",
@@ -15,5 +15,11 @@
     "generation",
     "ngram",
     "tokenizer"
-  ]
+  ],
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "jshint": "^2.9.5",
+    "mocha": "^3.4.2"
+  },
+  "dependencies": {}
 }

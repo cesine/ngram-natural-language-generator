@@ -1,6 +1,7 @@
 'use strict';
 
 var nlg = require('../lib/nlg').nlg;
+var expect = require('chai').expect;
 
 var TINY_MODEL = {
   '.': ['Colorless'],
@@ -14,7 +15,7 @@ var TINY_MODEL = {
 describe('nlg', function() {
 
   it('should load', function() {
-    expect(nlg).toBeDefined();
+    expect(nlg).to.be.a('function');
   });
 
   describe('options', function() {
@@ -26,7 +27,7 @@ describe('nlg', function() {
         minLength: 5
       });
 
-      expect(sentence).toEqual('Colorless green ideas sleep furiously. Colorless green ideas sleep furiously.');
+      expect(sentence).to.equal('Colorless green ideas sleep furiously. Colorless green ideas sleep furiously.');
     });
 
     it('should support sentence length', function() {
@@ -36,7 +37,7 @@ describe('nlg', function() {
         minLength: 1
       });
 
-      expect(sentence).toEqual('Colorless green ideas sleep furiously.');
+      expect(sentence).to.equal('Colorless green ideas sleep furiously.');
     });
 
   });
