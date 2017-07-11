@@ -76,6 +76,31 @@ describe('ngrams', function() {
       });
     });
 
+    it('should not fail on has own properties', function(done) {
+      var options = {
+        model: {
+          maxSize: 100
+        },
+        text: 'constructor prototype'
+      };
+
+      ngrams(options, function(err, result) {
+        expect(err).to.equal(null);
+        expect(result).to.equal(options);
+        expect(options.tokens).to.be.an('undefined');
+
+        expect(options.model).to.be.an('object');
+        expect(options.model.data).to.deep.equal({
+          '.': ['constructor'],
+          'constructor': ['prototype']
+        });
+        expect(options.model.typeCount).to.equal(2);
+        expect(options.model.tokenCount).to.equal(2);
+        expect(options.model.maxSize).to.equal(100);
+        done();
+      });
+    });
+
     it('should accept a filename', function(done) {
       var options = {
         model: {
