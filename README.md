@@ -59,7 +59,7 @@ There is an example browser use in [samples/index.html](samples/index.html).
 From file:
 
 ```javascript
-var generator = require('ngram-natural-language-generator');
+var generator = require('ngram-natural-language-generator').generator;
 
 generator({
 	filename: 'samples/jabberwocky.txt',
