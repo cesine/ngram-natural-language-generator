@@ -1,6 +1,6 @@
 {
   "name": "ngram-natural-language-generator",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "Takes in a text/file/stream and generates random sentences that sound like they could have been in the text",
   "main": "index.js",
   "scripts": {
