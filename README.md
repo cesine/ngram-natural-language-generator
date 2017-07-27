@@ -82,7 +82,7 @@ generator({
 From text:
 
 ```javascript
-var generator = require('ngram-natural-language-generator');
+var generator = require('ngram-natural-language-generator').generator;
 
 generator({
 	text: 'Colorless green ideas sleep furiously.',
@@ -98,7 +98,7 @@ generator({
 From web url:
 
 ```javascript
-var generator = require('ngram-natural-language-generator');
+var generator = require('ngram-natural-language-generator').generator;
 var http = require('http');
 
 http.get('http://www.jabberwocky.com/carroll/jabber/jabberwocky.html', function(res) {
@@ -117,7 +117,7 @@ If you're working with a language which doesn't tokenize on whitespace or unicod
 
 
 ```javascript
-var generator = require('ngram-natural-language-generator');
+var generator = require('ngram-natural-language-generator').generator;
 
 generator({
 	tokens: ['その', '酩酊', '状態を', '愛する', 'ことに', 'よって'],
